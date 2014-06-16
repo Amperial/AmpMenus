@@ -1,0 +1,10 @@
+/target
+.classpath
+.project
+.idea
+/.settings
+/bin
+dependency-reduced-pom.xml
+.sonar-ide.properties
+atlassian-ide-plugin.xml
+*.iml
