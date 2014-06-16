@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class ItemClickEvent {
     private Player player;
     private boolean goBack = false;
-    private boolean close = true;
+    private boolean close = false;
     private boolean update = false;
 
     public ItemClickEvent(Player player) {
