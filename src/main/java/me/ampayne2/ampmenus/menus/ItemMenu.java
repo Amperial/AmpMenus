@@ -147,28 +147,32 @@ public class ItemMenu implements Listener, Menu {
                     Player player = (Player) event.getWhoClicked();
                     ItemClickEvent itemClickEvent = new ItemClickEvent(player);
                     menuItems[slot].onItemClick(itemClickEvent);
-                    player.updateInventory();
-                    if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
-                        final String playerName = player.getName();
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                            public void run() {
-                                Player p = Bukkit.getPlayerExact(playerName);
-                                if (p != null) {
-                                    p.closeInventory();
+                    if (itemClickEvent.willUpdate()) {
+                        update(player);
+                    } else {
+                        player.updateInventory();
+                        if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
+                            final String playerName = player.getName();
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                                public void run() {
+                                    Player p = Bukkit.getPlayerExact(playerName);
+                                    if (p != null) {
+                                        p.closeInventory();
+                                    }
                                 }
-                            }
-                        }, 1);
-                    }
-                    if (itemClickEvent.willGoBack() && hasParent()) {
-                        final String playerName = player.getName();
-                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                            public void run() {
-                                Player p = Bukkit.getPlayerExact(playerName);
-                                if (p != null) {
-                                    parent.open(p);
+                            }, 1);
+                        }
+                        if (itemClickEvent.willGoBack() && hasParent()) {
+                            final String playerName = player.getName();
+                            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                                public void run() {
+                                    Player p = Bukkit.getPlayerExact(playerName);
+                                    if (p != null) {
+                                        parent.open(p);
+                                    }
                                 }
-                            }
-                        }, 3);
+                            }, 3);
+                        }
                     }
                 }
             }

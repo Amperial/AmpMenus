@@ -9,6 +9,7 @@ public class ItemClickEvent {
     private Player player;
     private boolean goBack = false;
     private boolean close = true;
+    private boolean update = false;
 
     public ItemClickEvent(Player player) {
         this.player = player;
@@ -41,6 +42,7 @@ public class ItemClickEvent {
         this.goBack = goBack;
         if (goBack) {
             close = false;
+            update = false;
         }
     }
 
@@ -62,6 +64,29 @@ public class ItemClickEvent {
         this.close = close;
         if (close) {
             goBack = false;
+            update = false;
+        }
+    }
+
+    /**
+     * Checks if the menu will update.
+     *
+     * @return True if the menu will update, else false.
+     */
+    public boolean willUpdate() {
+        return update;
+    }
+
+    /**
+     * Sets if the menu will update.
+     *
+     * @param update If the menu will update.
+     */
+    public void setWillUpdate(boolean update) {
+        this.update = update;
+        if (update) {
+            goBack = false;
+            close = false;
         }
     }
 }
