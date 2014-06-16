@@ -45,4 +45,16 @@ public interface Menu {
      * @param player The player.
      */
     void open(Player player);
+
+    /**
+     * Updates the menu.
+     *
+     * @param player The player to update it for.
+     */
+    void update(Player player);
+
+    /**
+     * Destroys the menu.
+     */
+    void destroy();
 }
