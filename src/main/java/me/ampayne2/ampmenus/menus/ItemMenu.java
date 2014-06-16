@@ -104,13 +104,12 @@ public class ItemMenu implements Listener, Menu {
      */
     @Override
     public void open(Player player) {
-        String playerName = player.getName();
         Inventory inventory = Bukkit.createInventory(player, size, name);
         for (int i = 0; i < menuItems.length; i++) {
             if (menuItems[i] == null) {
                 inventory.setItem(i, EMPTY_SLOT);
             } else {
-                inventory.setItem(i, menuItems[i].getFinalIcon(playerName));
+                inventory.setItem(i, menuItems[i].getFinalIcon(player));
             }
         }
         player.openInventory(inventory);
@@ -122,12 +121,11 @@ public class ItemMenu implements Listener, Menu {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getTitle().equals(name)) {
-                String playerName = player.getName();
                 for (int i = 0; i < menuItems.length; i++) {
                     if (menuItems[i] == null) {
                         inventory.setItem(i, EMPTY_SLOT);
                     } else {
-                        inventory.setItem(i, menuItems[i].getFinalIcon(playerName));
+                        inventory.setItem(i, menuItems[i].getFinalIcon(player));
                     }
                 }
                 player.updateInventory();

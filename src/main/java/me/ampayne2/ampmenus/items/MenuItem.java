@@ -3,6 +3,7 @@ package me.ampayne2.ampmenus.items;
 import me.ampayne2.ampmenus.events.ItemClickEvent;
 import me.ampayne2.ampmenus.events.ItemClickEventHandler;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -55,10 +56,10 @@ public class MenuItem implements ItemClickEventHandler {
     /**
      * Gets the ItemStack to be shown to the player.
      *
-     * @param playerName The player's name.
+     * @param player The player.
      * @return The final icon.
      */
-    public ItemStack getFinalIcon(String playerName) {
+    public ItemStack getFinalIcon(Player player) {
         ItemStack finalIcon = getIcon().clone();
         ItemMeta meta = finalIcon.getItemMeta();
         meta.setDisplayName(getDisplayName());
