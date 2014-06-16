@@ -138,7 +138,7 @@ public class ItemMenu implements Listener, Menu {
      */
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    void onInventoryClick(InventoryClickEvent event) {
+    public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getTitle().equals(name)) {
             event.setCancelled(true);
             if (event.getClick() == ClickType.LEFT) {
