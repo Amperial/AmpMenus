@@ -1,3 +1,21 @@
+/*
+ * This file is part of AmpMenus.
+ *
+ * Copyright (c) 2014 <http://github.com/ampayne2/>
+ *
+ * AmpMenus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * AmpMenus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.ampayne2.ampmenus.items;
 
 import me.ampayne2.ampmenus.events.ItemClickEvent;
@@ -8,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * An Item inside an {@link me.ampayne2.ampmenus.menus.ItemMenu}.
@@ -15,7 +34,7 @@ import java.util.Arrays;
 public class MenuItem implements ItemClickEventHandler {
     private final String displayName;
     private final ItemStack icon;
-    private final String[] lore;
+    private final List<String> lore;
 
     public MenuItem(String displayName, ItemStack icon, String... lore) {
         this.displayName = displayName;
@@ -23,7 +42,7 @@ public class MenuItem implements ItemClickEventHandler {
         for (int i = 0; i < lore.length; i++) {
             lore[i] = ChatColor.GRAY + lore[i];
         }
-        this.lore = lore;
+        this.lore = Arrays.asList(lore);
     }
 
     /**
@@ -49,7 +68,7 @@ public class MenuItem implements ItemClickEventHandler {
      *
      * @return The lore.
      */
-    public String[] getLore() {
+    public List<String> getLore() {
         return lore;
     }
 
@@ -63,12 +82,13 @@ public class MenuItem implements ItemClickEventHandler {
         ItemStack finalIcon = getIcon().clone();
         ItemMeta meta = finalIcon.getItemMeta();
         meta.setDisplayName(getDisplayName());
-        meta.setLore(Arrays.asList(getLore()));
+        meta.setLore(getLore());
         finalIcon.setItemMeta(meta);
         return finalIcon;
     }
 
     @Override
     public void onItemClick(ItemClickEvent event) {
+        // Do nothing by default
     }
 }

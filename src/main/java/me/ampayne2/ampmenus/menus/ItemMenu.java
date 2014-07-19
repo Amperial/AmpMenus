@@ -1,3 +1,21 @@
+/*
+ * This file is part of AmpMenus.
+ *
+ * Copyright (c) 2014 <http://github.com/ampayne2/>
+ *
+ * AmpMenus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * AmpMenus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.ampayne2.ampmenus.menus;
 
 import me.ampayne2.ampmenus.events.ItemClickEvent;
@@ -15,48 +33,49 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * A utility that allows creating inventories with items that do stuff when clicked.
+ * A Menu controlled by ItemStacks in an Inventory.
  */
-public class ItemMenu implements Listener, Menu {
+public class ItemMenu implements Menu, Listener {
+    private JavaPlugin plugin;
     private String name;
     private int size;
-    private Plugin plugin;
-    private MenuItem[] menuItems;
+    private MenuItem[] items;
     private Menu parent;
 
     /**
      * The ItemStack that appears in empty slots.
      */
-    private static final ItemStack EMPTY_SLOT;
+    @SuppressWarnings("deprecation")
+    private static final ItemStack EMPTY_SLOT = new ItemStack(Material.STAINED_GLASS_PANE, 1, DyeColor.GRAY.getData());
 
     /**
-     * Creates a new ItemMenu.
+     * Creates an {@link me.ampayne2.ampmenus.menus.ItemMenu}.
      *
      * @param name   The name of the inventory.
      * @param size   The size of the inventory.
-     * @param plugin The Plugin instance.
+     * @param plugin The {@link org.bukkit.plugin.java.JavaPlugin} instance.
      * @param parent The ItemMenu's parent.
      */
-    public ItemMenu(String name, int size, Plugin plugin, Menu parent) {
+    public ItemMenu(String name, int size, JavaPlugin plugin, Menu parent) {
+        this.plugin = plugin;
         this.name = name;
         this.size = size;
-        this.plugin = plugin;
-        this.menuItems = new MenuItem[size];
+        this.items = new MenuItem[size];
         this.parent = parent;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     /**
-     * Creates a new ItemMenu with no parent.
+     * Creates an {@link me.ampayne2.ampmenus.menus.ItemMenu} with no parent.
      *
      * @param name   The name of the inventory.
      * @param size   The size of the inventory.
      * @param plugin The Plugin instance.
      */
-    public ItemMenu(String name, int size, Plugin plugin) {
+    public ItemMenu(String name, int size, JavaPlugin plugin) {
         this(name, size, plugin, null);
     }
 
@@ -90,28 +109,22 @@ public class ItemMenu implements Listener, Menu {
      *
      * @param position The slot position.
      * @param menuItem The {@link me.ampayne2.ampmenus.items.MenuItem}.
-     * @return The ItemMenu.
+     * @return The {@link me.ampayne2.ampmenus.menus.ItemMenu}.
      */
     public ItemMenu setItem(int position, MenuItem menuItem) {
-        menuItems[position] = menuItem;
+        items[position] = menuItem;
         return this;
     }
 
     /**
-     * Opens the ItemMenu for a player.
+     * Opens the {@link me.ampayne2.ampmenus.menus.ItemMenu} for a player.
      *
      * @param player The player.
      */
     @Override
     public void open(Player player) {
         Inventory inventory = Bukkit.createInventory(player, size, name);
-        for (int i = 0; i < menuItems.length; i++) {
-            if (menuItems[i] == null) {
-                inventory.setItem(i, EMPTY_SLOT);
-            } else {
-                inventory.setItem(i, menuItems[i].getFinalIcon(player));
-            }
-        }
+        apply(inventory, player);
         player.openInventory(inventory);
     }
 
@@ -121,14 +134,24 @@ public class ItemMenu implements Listener, Menu {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
             if (inventory.getTitle().equals(name)) {
-                for (int i = 0; i < menuItems.length; i++) {
-                    if (menuItems[i] == null) {
-                        inventory.setItem(i, EMPTY_SLOT);
-                    } else {
-                        inventory.setItem(i, menuItems[i].getFinalIcon(player));
-                    }
-                }
+                apply(inventory, player);
                 player.updateInventory();
+            }
+        }
+    }
+
+    /**
+     * Applies a Player's ItemMenu to an Inventory.
+     *
+     * @param inventory The Inventory.
+     * @param player    The Player.
+     */
+    private void apply(Inventory inventory, Player player) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                inventory.setItem(i, EMPTY_SLOT);
+            } else {
+                inventory.setItem(i, items[i].getFinalIcon(player));
             }
         }
     }
@@ -143,10 +166,10 @@ public class ItemMenu implements Listener, Menu {
             event.setCancelled(true);
             if (event.getClick() == ClickType.LEFT) {
                 int slot = event.getRawSlot();
-                if (slot >= 0 && slot < size && menuItems[slot] != null) {
+                if (slot >= 0 && slot < size && items[slot] != null) {
                     Player player = (Player) event.getWhoClicked();
                     ItemClickEvent itemClickEvent = new ItemClickEvent(player);
-                    menuItems[slot].onItemClick(itemClickEvent);
+                    items[slot].onItemClick(itemClickEvent);
                     if (itemClickEvent.willUpdate()) {
                         update(player);
                     } else {
@@ -183,11 +206,10 @@ public class ItemMenu implements Listener, Menu {
     public void destroy() {
         HandlerList.unregisterAll(this);
         plugin = null;
-        menuItems = null;
+        items = null;
     }
 
     static {
-        EMPTY_SLOT = new ItemStack(Material.STAINED_GLASS_PANE, 1, DyeColor.GRAY.getData());
         ItemMeta meta = EMPTY_SLOT.getItemMeta();
         meta.setDisplayName(" ");
         EMPTY_SLOT.setItemMeta(meta);

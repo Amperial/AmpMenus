@@ -1,9 +1,27 @@
+/*
+ * This file is part of AmpMenus.
+ *
+ * Copyright (c) 2014 <http://github.com/ampayne2/>
+ *
+ * AmpMenus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * AmpMenus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package me.ampayne2.ampmenus.events;
 
 import org.bukkit.entity.Player;
 
 /**
- * An event fired when an Icon in the IconMenu is clicked.
+ * An event called when an Item in the {@link me.ampayne2.ampmenus.menus.Menu} is clicked.
  */
 public class ItemClickEvent {
     private Player player;
@@ -18,25 +36,25 @@ public class ItemClickEvent {
     /**
      * Gets the player who clicked.
      *
-     * @return The player.
+     * @return The player who clicked.
      */
     public Player getPlayer() {
         return player;
     }
 
     /**
-     * Checks if the menu will go back to the parent menu.
+     * Checks if the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu.
      *
-     * @return True if the menu will go back to the parent menu, else false.
+     * @return True if the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu, else false.
      */
     public boolean willGoBack() {
         return goBack;
     }
 
     /**
-     * Sets if the menu will go back to the parent menu.
+     * Sets if the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu.
      *
-     * @param goBack If the menu will go back to the parent menu.
+     * @param goBack If the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu.
      */
     public void setWillGoBack(boolean goBack) {
         this.goBack = goBack;
@@ -47,18 +65,18 @@ public class ItemClickEvent {
     }
 
     /**
-     * Checks if the menu will close.
+     * Checks if the {@link me.ampayne2.ampmenus.menus.Menu} will close.
      *
-     * @return True if the menu will close, else false.
+     * @return True if the {@link me.ampayne2.ampmenus.menus.Menu} will close, else false.
      */
     public boolean willClose() {
         return close;
     }
 
     /**
-     * Sets if the menu will close.
+     * Sets if the {@link me.ampayne2.ampmenus.menus.Menu} will close.
      *
-     * @param close If the menu will close.
+     * @param close If the {@link me.ampayne2.ampmenus.menus.Menu} will close.
      */
     public void setWillClose(boolean close) {
         this.close = close;
@@ -69,18 +87,18 @@ public class ItemClickEvent {
     }
 
     /**
-     * Checks if the menu will update.
+     * Checks if the {@link me.ampayne2.ampmenus.menus.Menu} will update.
      *
-     * @return True if the menu will update, else false.
+     * @return True if the {@link me.ampayne2.ampmenus.menus.Menu} will update, else false.
      */
     public boolean willUpdate() {
         return update;
     }
 
     /**
-     * Sets if the menu will update.
+     * Sets if the {@link me.ampayne2.ampmenus.menus.Menu} will update.
      *
-     * @param update If the menu will update.
+     * @param update If the {@link me.ampayne2.ampmenus.menus.Menu} will update.
      */
     public void setWillUpdate(boolean update) {
         this.update = update;

@@ -10,7 +10,7 @@
     <description>An inventory menu library for Bukkit</description>
 
     <organization>
-        <name>AmpLib</name>
+        <name>AmpMenus</name>
         <url>http://github.com/ampayne2</url>
     </organization>
 
@@ -36,6 +36,7 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>clean install</defaultGoal>
         <plugins>
+            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -50,6 +51,56 @@
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
+            </plugin>
+            <!-- License header plugin -->
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.10.b1</version>
+                <executions>
+                    <execution>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <quiet>false</quiet>
+                    <encoding>UTF-8</encoding>
+                    <strictCheck>true</strictCheck>
+                    <header>${basedir}/HEADER.txt</header>
+                    <keywords>
+                        <keyword>${project.name}</keyword>
+                        <keyword>license</keyword>
+                    </keywords>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                    <properties>
+                        <name>${project.name}</name>
+                        <url>${project.organization.url}</url>
+                        <copyright>Copyright (c) ${project.inceptionYear}</copyright>
+                    </properties>
+                    <includes>
+                        <include>src/main/java/**</include>
+                        <include>src/test/java/**</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <!-- Javadoc .jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
