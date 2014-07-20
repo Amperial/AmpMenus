@@ -1,7 +1,7 @@
 /*
  * This file is part of AmpMenus.
  *
- * Copyright (c) 2014 <http://github.com/ampayne2/>
+ * Copyright (c) 2014 <http://github.com/ampayne2/AmpMenus/>
  *
  * AmpMenus is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -123,7 +123,7 @@ public class ItemMenu implements Menu, Listener {
      */
     @Override
     public void open(Player player) {
-        Inventory inventory = Bukkit.createInventory(player, size, name);
+        Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, size)), size, name);
         apply(inventory, player);
         player.openInventory(inventory);
     }
@@ -133,7 +133,7 @@ public class ItemMenu implements Menu, Listener {
     public void update(Player player) {
         if (player.getOpenInventory() != null) {
             Inventory inventory = player.getOpenInventory().getTopInventory();
-            if (inventory.getTitle().equals(name)) {
+            if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
                 apply(inventory, player);
                 player.updateInventory();
             }
@@ -162,40 +162,42 @@ public class ItemMenu implements Menu, Listener {
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getInventory().getTitle().equals(name)) {
-            event.setCancelled(true);
-            if (event.getClick() == ClickType.LEFT) {
-                int slot = event.getRawSlot();
-                if (slot >= 0 && slot < size && items[slot] != null) {
-                    Player player = (Player) event.getWhoClicked();
-                    ItemClickEvent itemClickEvent = new ItemClickEvent(player);
-                    items[slot].onItemClick(itemClickEvent);
-                    if (itemClickEvent.willUpdate()) {
-                        update(player);
-                    } else {
-                        player.updateInventory();
-                        if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
-                            final String playerName = player.getName();
-                            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                                public void run() {
-                                    Player p = Bukkit.getPlayerExact(playerName);
-                                    if (p != null) {
-                                        p.closeInventory();
-                                    }
+        if (!(event.getWhoClicked() instanceof Player) || !(event.getInventory().getHolder() instanceof MenuHolder) || !((MenuHolder) event.getInventory().getHolder()).getMenu().equals(this)) {
+            return;
+        }
+
+        event.setCancelled(true);
+        if (event.getClick() == ClickType.LEFT) {
+            int slot = event.getRawSlot();
+            if (slot >= 0 && slot < size && items[slot] != null) {
+                Player player = (Player) event.getWhoClicked();
+                ItemClickEvent itemClickEvent = new ItemClickEvent(player);
+                items[slot].onItemClick(itemClickEvent);
+                if (itemClickEvent.willUpdate()) {
+                    update(player);
+                } else {
+                    player.updateInventory();
+                    if (itemClickEvent.willClose() || itemClickEvent.willGoBack()) {
+                        final String playerName = player.getName();
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                            public void run() {
+                                Player p = Bukkit.getPlayerExact(playerName);
+                                if (p != null) {
+                                    p.closeInventory();
                                 }
-                            }, 1);
-                        }
-                        if (itemClickEvent.willGoBack() && hasParent()) {
-                            final String playerName = player.getName();
-                            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                                public void run() {
-                                    Player p = Bukkit.getPlayerExact(playerName);
-                                    if (p != null) {
-                                        parent.open(p);
-                                    }
+                            }
+                        }, 1);
+                    }
+                    if (itemClickEvent.willGoBack() && hasParent()) {
+                        final String playerName = player.getName();
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                            public void run() {
+                                Player p = Bukkit.getPlayerExact(playerName);
+                                if (p != null) {
+                                    parent.open(p);
                                 }
-                            }, 3);
-                        }
+                            }
+                        }, 3);
                     }
                 }
             }

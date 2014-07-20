@@ -16,17 +16,34 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.events;
+package me.ampayne2.ampmenus.menus;
+
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 
 /**
- * Handles {@link me.ampayne2.ampmenus.events.ItemClickEvent}s.
+ * Allows you to set the {@link me.ampayne2.ampmenus.menus.Menu} that created the Inventory as the Inventory's holder.
  */
-public interface ItemClickEventHandler {
+public class MenuHolder implements InventoryHolder {
+    private Menu menu;
+    private Inventory inventory;
+
+    public MenuHolder(Menu menu, Inventory inventory) {
+        this.menu = menu;
+        this.inventory = inventory;
+    }
 
     /**
-     * Called when an Item in the {@link me.ampayne2.ampmenus.menus.Menu} is clicked.
+     * Gets the {@link me.ampayne2.ampmenus.menus.Menu} holding the Inventory.
      *
-     * @param event The ItemClickEvent.
+     * @return The {@link me.ampayne2.ampmenus.menus.Menu} holding the Inventory.
      */
-    void onItemClick(ItemClickEvent event);
+    public Menu getMenu() {
+        return menu;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

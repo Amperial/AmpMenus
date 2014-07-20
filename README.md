@@ -56,7 +56,7 @@ Advanced Usage:
             super("Shop", 18, plugin);
 
             // Adding items to your ItemMenu
-            menu.setItem(17, new CloseItem());
+            setItem(17, new CloseItem());
         }
     
         // Useful in case you only want the back item to appear if the menu has a parent
@@ -64,7 +64,7 @@ Advanced Usage:
         public void setParent(Menu parent) {
             super.setParent(parent);
             if (parent != null) {
-                getIconMenu().setItem(16, new BackItem());
+                setItem(16, new BackItem());
             }
         }
     }
