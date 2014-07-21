@@ -20,7 +20,6 @@ package me.ampayne2.ampmenus.items;
 
 import me.ampayne2.ampmenus.events.ItemClickEvent;
 import me.ampayne2.ampmenus.events.ItemClickEventHandler;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -39,9 +38,6 @@ public class MenuItem implements ItemClickEventHandler {
     public MenuItem(String displayName, ItemStack icon, String... lore) {
         this.displayName = displayName;
         this.icon = icon;
-        for (int i = 0; i < lore.length; i++) {
-            lore[i] = ChatColor.GRAY + lore[i];
-        }
         this.lore = Arrays.asList(lore);
     }
 
