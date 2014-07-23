@@ -21,8 +21,6 @@ package me.ampayne2.ampmenus.menus;
 import me.ampayne2.ampmenus.events.ItemClickEvent;
 import me.ampayne2.ampmenus.items.MenuItem;
 import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,8 +29,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -44,12 +40,6 @@ public class ItemMenu implements Menu, Listener {
     private int size;
     private MenuItem[] items;
     private Menu parent;
-
-    /**
-     * The ItemStack that appears in empty slots.
-     */
-    @SuppressWarnings("deprecation")
-    private static final ItemStack EMPTY_SLOT = new ItemStack(Material.STAINED_GLASS_PANE, 1, DyeColor.GRAY.getData());
 
     /**
      * Creates an {@link me.ampayne2.ampmenus.menus.ItemMenu}.
@@ -148,9 +138,7 @@ public class ItemMenu implements Menu, Listener {
      */
     private void apply(Inventory inventory, Player player) {
         for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) {
-                inventory.setItem(i, EMPTY_SLOT);
-            } else {
+            if (items[i] != null) {
                 inventory.setItem(i, items[i].getFinalIcon(player));
             }
         }
@@ -209,11 +197,5 @@ public class ItemMenu implements Menu, Listener {
         HandlerList.unregisterAll(this);
         plugin = null;
         items = null;
-    }
-
-    static {
-        ItemMeta meta = EMPTY_SLOT.getItemMeta();
-        meta.setDisplayName(" ");
-        EMPTY_SLOT.setItemMeta(meta);
     }
 }
