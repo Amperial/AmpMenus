@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.events;
+package ninja.amp.ampmenus.events;
 
 /**
- * Handles {@link me.ampayne2.ampmenus.events.ItemClickEvent}s.
+ * Handles {@link ninja.amp.ampmenus.events.ItemClickEvent}s.
  */
 public interface ItemClickEventHandler {
 
     /**
-     * Called when an Item in the {@link me.ampayne2.ampmenus.menus.Menu} is clicked.
+     * Called when an Item in the {@link ninja.amp.ampmenus.menus.Menu} is clicked.
      *
      * @param event The ItemClickEvent.
      */

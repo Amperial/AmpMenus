@@ -32,9 +32,9 @@ If you're using [Maven](http://maven.apache.org/download.html) to manage project
     </repository>
 
     <dependency>
-      <groupId>me.ampayne2</groupId>
+      <groupId>ninja.amp</groupId>
       <artifactId>ampmenus</artifactId>
-      <version>1.0</version>
+      <version>1.1</version>
       <scope>compile</scope>
     </dependency>
 

@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.items;
+package ninja.amp.ampmenus.items;
 
-import me.ampayne2.ampmenus.events.ItemClickEvent;
-import me.ampayne2.ampmenus.events.ItemClickEventHandler;
+import ninja.amp.ampmenus.events.ItemClickEvent;
+import ninja.amp.ampmenus.events.ItemClickEventHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * An Item inside an {@link me.ampayne2.ampmenus.menus.ItemMenu}.
+ * An Item inside an {@link ninja.amp.ampmenus.menus.ItemMenu}.
  */
 public class MenuItem implements ItemClickEventHandler {
     private final String displayName;

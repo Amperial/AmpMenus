@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.ampayne2</groupId>
+    <groupId>ninja.amp</groupId>
     <artifactId>ampmenus</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <inceptionYear>2014</inceptionYear>
     <name>AmpMenus</name>
     <description>An inventory menu library for Bukkit</description>

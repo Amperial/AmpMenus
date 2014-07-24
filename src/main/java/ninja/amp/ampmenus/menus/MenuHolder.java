@@ -16,27 +16,34 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.items;
+package ninja.amp.ampmenus.menus;
 
-import me.ampayne2.ampmenus.events.ItemClickEvent;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 
 /**
- * A {@link me.ampayne2.ampmenus.items.MenuItem} that closes the {@link me.ampayne2.ampmenus.menus.Menu}.
+ * Allows you to set the {@link ninja.amp.ampmenus.menus.Menu} that created the Inventory as the Inventory's holder.
  */
-public class CloseItem extends MenuItem {
-    private static final String DISPLAY_NAME = ChatColor.RED + "Close";
-    private static final ItemStack ICON = new ItemStack(Material.RECORD_4); // Red music disc (chirp)
+public class MenuHolder implements InventoryHolder {
+    private Menu menu;
+    private Inventory inventory;
 
-    public CloseItem() {
-        super(DISPLAY_NAME, ICON);
-        getLore().clear(); // Clear the music disc name
+    public MenuHolder(Menu menu, Inventory inventory) {
+        this.menu = menu;
+        this.inventory = inventory;
+    }
+
+    /**
+     * Gets the {@link ninja.amp.ampmenus.menus.Menu} holding the Inventory.
+     *
+     * @return The {@link ninja.amp.ampmenus.menus.Menu} holding the Inventory.
+     */
+    public Menu getMenu() {
+        return menu;
     }
 
     @Override
-    public void onItemClick(ItemClickEvent event) {
-        event.setWillClose(true);
+    public Inventory getInventory() {
+        return inventory;
     }
 }

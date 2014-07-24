@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.menus;
+package ninja.amp.ampmenus.menus;
 
-import me.ampayne2.ampmenus.events.ItemClickEvent;
-import me.ampayne2.ampmenus.items.MenuItem;
+import ninja.amp.ampmenus.events.ItemClickEvent;
+import ninja.amp.ampmenus.items.MenuItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,7 +42,7 @@ public class ItemMenu implements Menu, Listener {
     private Menu parent;
 
     /**
-     * Creates an {@link me.ampayne2.ampmenus.menus.ItemMenu}.
+     * Creates an {@link ninja.amp.ampmenus.menus.ItemMenu}.
      *
      * @param name   The name of the inventory.
      * @param size   The size of the inventory.
@@ -59,7 +59,7 @@ public class ItemMenu implements Menu, Listener {
     }
 
     /**
-     * Creates an {@link me.ampayne2.ampmenus.menus.ItemMenu} with no parent.
+     * Creates an {@link ninja.amp.ampmenus.menus.ItemMenu} with no parent.
      *
      * @param name   The name of the inventory.
      * @param size   The size of the inventory.
@@ -95,11 +95,11 @@ public class ItemMenu implements Menu, Listener {
     }
 
     /**
-     * Sets the {@link me.ampayne2.ampmenus.items.MenuItem} of a slot.
+     * Sets the {@link ninja.amp.ampmenus.items.MenuItem} of a slot.
      *
      * @param position The slot position.
-     * @param menuItem The {@link me.ampayne2.ampmenus.items.MenuItem}.
-     * @return The {@link me.ampayne2.ampmenus.menus.ItemMenu}.
+     * @param menuItem The {@link ninja.amp.ampmenus.items.MenuItem}.
+     * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
      */
     public ItemMenu setItem(int position, MenuItem menuItem) {
         items[position] = menuItem;
@@ -107,7 +107,7 @@ public class ItemMenu implements Menu, Listener {
     }
 
     /**
-     * Opens the {@link me.ampayne2.ampmenus.menus.ItemMenu} for a player.
+     * Opens the {@link ninja.amp.ampmenus.menus.ItemMenu} for a player.
      *
      * @param player The player.
      */

@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.items;
+package ninja.amp.ampmenus.items;
 
-import me.ampayne2.ampmenus.events.ItemClickEvent;
+import ninja.amp.ampmenus.events.ItemClickEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A {@link me.ampayne2.ampmenus.items.MenuItem} that opens the {@link me.ampayne2.ampmenus.menus.Menu}'s parent menu if it exists.
+ * A {@link ninja.amp.ampmenus.items.MenuItem} that opens the {@link ninja.amp.ampmenus.menus.Menu}'s parent menu if it exists.
  */
 public class BackItem extends MenuItem {
     private static final String DISPLAY_NAME = ChatColor.RED + "Back";

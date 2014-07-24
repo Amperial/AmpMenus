@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.items;
+package ninja.amp.ampmenus.items;
 
-import me.ampayne2.ampmenus.events.ItemClickEvent;
-import me.ampayne2.ampmenus.menus.Menu;
+import ninja.amp.ampmenus.events.ItemClickEvent;
+import ninja.amp.ampmenus.menus.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * A {@link me.ampayne2.ampmenus.items.MenuItem} that opens a sub {@link me.ampayne2.ampmenus.menus.Menu}.
+ * A {@link ninja.amp.ampmenus.items.MenuItem} that opens a sub {@link ninja.amp.ampmenus.menus.Menu}.
  */
 public class SubMenuItem extends MenuItem {
     private final JavaPlugin plugin;

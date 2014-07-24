@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with AmpMenus.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ampayne2.ampmenus.events;
+package ninja.amp.ampmenus.events;
 
 import org.bukkit.entity.Player;
 
 /**
- * An event called when an Item in the {@link me.ampayne2.ampmenus.menus.Menu} is clicked.
+ * An event called when an Item in the {@link ninja.amp.ampmenus.menus.Menu} is clicked.
  */
 public class ItemClickEvent {
     private Player player;
@@ -43,18 +43,18 @@ public class ItemClickEvent {
     }
 
     /**
-     * Checks if the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu.
+     * Checks if the {@link ninja.amp.ampmenus.menus.Menu} will go back to the parent menu.
      *
-     * @return True if the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu, else false.
+     * @return True if the {@link ninja.amp.ampmenus.menus.Menu} will go back to the parent menu, else false.
      */
     public boolean willGoBack() {
         return goBack;
     }
 
     /**
-     * Sets if the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu.
+     * Sets if the {@link ninja.amp.ampmenus.menus.Menu} will go back to the parent menu.
      *
-     * @param goBack If the {@link me.ampayne2.ampmenus.menus.Menu} will go back to the parent menu.
+     * @param goBack If the {@link ninja.amp.ampmenus.menus.Menu} will go back to the parent menu.
      */
     public void setWillGoBack(boolean goBack) {
         this.goBack = goBack;
@@ -65,18 +65,18 @@ public class ItemClickEvent {
     }
 
     /**
-     * Checks if the {@link me.ampayne2.ampmenus.menus.Menu} will close.
+     * Checks if the {@link ninja.amp.ampmenus.menus.Menu} will close.
      *
-     * @return True if the {@link me.ampayne2.ampmenus.menus.Menu} will close, else false.
+     * @return True if the {@link ninja.amp.ampmenus.menus.Menu} will close, else false.
      */
     public boolean willClose() {
         return close;
     }
 
     /**
-     * Sets if the {@link me.ampayne2.ampmenus.menus.Menu} will close.
+     * Sets if the {@link ninja.amp.ampmenus.menus.Menu} will close.
      *
-     * @param close If the {@link me.ampayne2.ampmenus.menus.Menu} will close.
+     * @param close If the {@link ninja.amp.ampmenus.menus.Menu} will close.
      */
     public void setWillClose(boolean close) {
         this.close = close;
@@ -87,18 +87,18 @@ public class ItemClickEvent {
     }
 
     /**
-     * Checks if the {@link me.ampayne2.ampmenus.menus.Menu} will update.
+     * Checks if the {@link ninja.amp.ampmenus.menus.Menu} will update.
      *
-     * @return True if the {@link me.ampayne2.ampmenus.menus.Menu} will update, else false.
+     * @return True if the {@link ninja.amp.ampmenus.menus.Menu} will update, else false.
      */
     public boolean willUpdate() {
         return update;
     }
 
     /**
-     * Sets if the {@link me.ampayne2.ampmenus.menus.Menu} will update.
+     * Sets if the {@link ninja.amp.ampmenus.menus.Menu} will update.
      *
-     * @param update If the {@link me.ampayne2.ampmenus.menus.Menu} will update.
+     * @param update If the {@link ninja.amp.ampmenus.menus.Menu} will update.
      */
     public void setWillUpdate(boolean update) {
         this.update = update;
