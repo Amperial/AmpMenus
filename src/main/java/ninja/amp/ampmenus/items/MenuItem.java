@@ -75,16 +75,27 @@ public class MenuItem implements ItemClickEventHandler {
      * @return The final icon.
      */
     public ItemStack getFinalIcon(Player player) {
-        ItemStack finalIcon = getIcon().clone();
-        ItemMeta meta = finalIcon.getItemMeta();
-        meta.setDisplayName(getDisplayName());
-        meta.setLore(getLore());
-        finalIcon.setItemMeta(meta);
-        return finalIcon;
+        return setNameAndLore(getIcon().clone(), getDisplayName(), getLore());
     }
 
     @Override
     public void onItemClick(ItemClickEvent event) {
         // Do nothing by default
+    }
+
+    /**
+     * Sets the display name and lore of an ItemStack.
+     *
+     * @param itemStack   The ItemStack.
+     * @param displayName The display name.
+     * @param lore        The lore.
+     * @return The ItemStack.
+     */
+    public static ItemStack setNameAndLore(ItemStack itemStack, String displayName, List<String> lore) {
+        ItemMeta meta = itemStack.getItemMeta();
+        meta.setDisplayName(displayName);
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+        return itemStack;
     }
 }

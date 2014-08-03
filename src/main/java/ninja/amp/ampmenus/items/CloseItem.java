@@ -24,15 +24,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A {@link ninja.amp.ampmenus.items.MenuItem} that closes the {@link ninja.amp.ampmenus.menus.Menu}.
+ * A {@link ninja.amp.ampmenus.items.StaticMenuItem} that closes the {@link ninja.amp.ampmenus.menus.Menu}.
  */
-public class CloseItem extends MenuItem {
-    private static final String DISPLAY_NAME = ChatColor.RED + "Close";
-    private static final ItemStack ICON = new ItemStack(Material.RECORD_4); // Red music disc (chirp)
+public class CloseItem extends StaticMenuItem {
 
     public CloseItem() {
-        super(DISPLAY_NAME, ICON);
-        getLore().clear(); // Clear the music disc name
+        super(ChatColor.RED + "Close", new ItemStack(Material.RECORD_4));
     }
 
     @Override

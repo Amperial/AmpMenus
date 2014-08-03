@@ -20,7 +20,10 @@ package ninja.amp.ampmenus.menus;
 
 import ninja.amp.ampmenus.events.ItemClickEvent;
 import ninja.amp.ampmenus.items.MenuItem;
+import ninja.amp.ampmenus.items.StaticMenuItem;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,6 +32,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -40,6 +44,12 @@ public class ItemMenu implements Menu, Listener {
     private int size;
     private MenuItem[] items;
     private Menu parent;
+
+    /**
+     * The {@link ninja.amp.ampmenus.items.StaticMenuItem} that appears in empty slots if {@link ninja.amp.ampmenus.menus.ItemMenu#fillEmptySlots()} is called.
+     */
+    @SuppressWarnings("deprecation")
+    private static final MenuItem EMPTY_SLOT_ITEM = new StaticMenuItem(" ", new ItemStack(Material.STAINED_GLASS_PANE, 1, DyeColor.GRAY.getData()));
 
     /**
      * Creates an {@link ninja.amp.ampmenus.menus.ItemMenu}.
@@ -107,6 +117,30 @@ public class ItemMenu implements Menu, Listener {
     }
 
     /**
+     * Fills all empty slots in the {@link ninja.amp.ampmenus.menus.ItemMenu} with a certain {@link ninja.amp.ampmenus.items.MenuItem}.
+     *
+     * @param menuItem The {@link ninja.amp.ampmenus.items.MenuItem}.
+     * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
+     */
+    public ItemMenu fillEmptySlots(MenuItem menuItem) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                items[i] = menuItem;
+            }
+        }
+        return this;
+    }
+
+    /**
+     * Fills all empty slots in the {@link ninja.amp.ampmenus.menus.ItemMenu} with the default empty slot item.
+     *
+     * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
+     */
+    public ItemMenu fillEmptySlots() {
+        return fillEmptySlots(EMPTY_SLOT_ITEM);
+    }
+
+    /**
      * Opens the {@link ninja.amp.ampmenus.menus.ItemMenu} for a player.
      *
      * @param player The player.
@@ -148,7 +182,7 @@ public class ItemMenu implements Menu, Listener {
      * Handles InventoryClickEvents for the ItemMenu.
      */
     @SuppressWarnings("deprecation")
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player) || !(event.getInventory().getHolder() instanceof MenuHolder) || !((MenuHolder) event.getInventory().getHolder()).getMenu().equals(this)) {
             return;

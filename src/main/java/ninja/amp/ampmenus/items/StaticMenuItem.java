@@ -18,22 +18,21 @@
  */
 package ninja.amp.ampmenus.items;
 
-import ninja.amp.ampmenus.events.ItemClickEvent;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A {@link ninja.amp.ampmenus.items.StaticMenuItem} that opens the {@link ninja.amp.ampmenus.menus.Menu}'s parent menu if it exists.
+ * A {@link ninja.amp.ampmenus.items.MenuItem} whose icon never changes.
  */
-public class BackItem extends StaticMenuItem {
+public class StaticMenuItem extends MenuItem {
 
-    public BackItem() {
-        super(ChatColor.RED + "Back", new ItemStack(Material.FENCE_GATE));
+    public StaticMenuItem(String displayName, ItemStack icon, String... lore) {
+        super(displayName, icon, lore);
+        setNameAndLore(getIcon(), getDisplayName(), getLore());
     }
 
     @Override
-    public void onItemClick(ItemClickEvent event) {
-        event.setWillGoBack(true);
+    public ItemStack getFinalIcon(Player player) {
+        return getIcon();
     }
 }
