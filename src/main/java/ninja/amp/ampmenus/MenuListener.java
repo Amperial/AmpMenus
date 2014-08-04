@@ -19,6 +19,7 @@
 package ninja.amp.ampmenus;
 
 import ninja.amp.ampmenus.menus.MenuHolder;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,6 +27,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -89,7 +91,22 @@ public class MenuListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPluginDisable(PluginDisableEvent event) {
         if (event.getPlugin().equals(plugin)) {
+            closeOpenMenus();
             plugin = null;
+        }
+    }
+
+    /**
+     * Closes all {@link ninja.amp.ampmenus.menus.ItemMenu}s currently open.
+     */
+    public static void closeOpenMenus() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.getOpenInventory() != null) {
+                Inventory inventory = player.getOpenInventory().getTopInventory();
+                if (inventory.getHolder() instanceof MenuHolder) {
+                    player.closeInventory();
+                }
+            }
         }
     }
 }
