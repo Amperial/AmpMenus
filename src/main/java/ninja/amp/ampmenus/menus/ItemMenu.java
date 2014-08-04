@@ -18,6 +18,7 @@
  */
 package ninja.amp.ampmenus.menus;
 
+import ninja.amp.ampmenus.MenuListener;
 import ninja.amp.ampmenus.events.ItemClickEvent;
 import ninja.amp.ampmenus.items.MenuItem;
 import ninja.amp.ampmenus.items.StaticMenuItem;
@@ -25,10 +26,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -38,7 +35,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * A Menu controlled by ItemStacks in an Inventory.
  */
-public class ItemMenu implements Menu, Listener {
+public class ItemMenu implements Menu {
     private JavaPlugin plugin;
     private String name;
     private int size;
@@ -65,7 +62,7 @@ public class ItemMenu implements Menu, Listener {
         this.size = size;
         this.items = new MenuItem[size];
         this.parent = parent;
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+        MenuListener.getInstance().register(plugin);
     }
 
     /**
@@ -147,9 +144,11 @@ public class ItemMenu implements Menu, Listener {
      */
     @Override
     public void open(Player player) {
-        Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, size)), size, name);
-        apply(inventory, player);
-        player.openInventory(inventory);
+        if (MenuListener.getInstance().isRegistered(plugin)) {
+            Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, size)), size, name);
+            apply(inventory, player);
+            player.openInventory(inventory);
+        }
     }
 
     @Override
@@ -182,13 +181,7 @@ public class ItemMenu implements Menu, Listener {
      * Handles InventoryClickEvents for the ItemMenu.
      */
     @SuppressWarnings("deprecation")
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player) || !(event.getInventory().getHolder() instanceof MenuHolder) || !((MenuHolder) event.getInventory().getHolder()).getMenu().equals(this)) {
-            return;
-        }
-
-        event.setCancelled(true);
         if (event.getClick() == ClickType.LEFT) {
             int slot = event.getRawSlot();
             if (slot >= 0 && slot < size && items[slot] != null) {
@@ -228,7 +221,6 @@ public class ItemMenu implements Menu, Listener {
 
     @Override
     public void destroy() {
-        HandlerList.unregisterAll(this);
         plugin = null;
         items = null;
     }
