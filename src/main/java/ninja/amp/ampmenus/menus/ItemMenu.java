@@ -144,11 +144,12 @@ public class ItemMenu implements Menu {
      */
     @Override
     public void open(Player player) {
-        if (MenuListener.getInstance().isRegistered(plugin)) {
-            Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, size)), size, name);
-            apply(inventory, player);
-            player.openInventory(inventory);
+        if (!MenuListener.getInstance().isRegistered(plugin)) {
+            MenuListener.getInstance().register(plugin);
         }
+        Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, size)), size, name);
+        apply(inventory, player);
+        player.openInventory(inventory);
     }
 
     @Override
