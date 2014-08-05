@@ -34,14 +34,14 @@ If you're using [Maven](http://maven.apache.org/download.html) to manage project
     <dependency>
       <groupId>ninja.amp</groupId>
       <artifactId>ampmenus</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
       <scope>compile</scope>
     </dependency>
 
 Basic Usage:
 
     // Create an ItemMenu instance - you only need one of these. Don't create one every time you need it...
-    ItemMenu menu = new ItemMenu("Shop", 18, plugin);
+    ItemMenu menu = new ItemMenu("Shop", Size.TWO_LINE, plugin);
     
     // Adding items to your ItemMenu
     menu.setItem(17, new CloseItem());
@@ -53,7 +53,7 @@ Advanced Usage:
 
     public class ShopMenu extends ItemMenu {
         public ShopMenu(JavaPlugin plugin) {
-            super("Shop", 18, plugin);
+            super("Shop", Size.TWO_LINE, plugin);
 
             // Adding items to your ItemMenu
             setItem(17, new CloseItem());
@@ -61,7 +61,7 @@ Advanced Usage:
     
         // Useful in case you only want the back item to appear if the menu has a parent
         @Override
-        public void setParent(Menu parent) {
+        public void setParent(ItemMenu parent) {
             super.setParent(parent);
             if (parent != null) {
                 setItem(16, new BackItem());
@@ -70,10 +70,10 @@ Advanced Usage:
     }
 
     // Setting parent menus so that the BackItem knows where to go
-    ItemMenu subMenu = new ItemMenu("Vote Perks", 45, plugin);
+    ItemMenu subMenu = new ItemMenu("Vote Perks", Size.FIVE_LINE, plugin);
     subMenu.setParent(mainMenu);
     OR
-    ItemMenu subMenu = new ItemMenu("Vote Perks", 45, plugin, mainMenu);
+    ItemMenu subMenu = new ItemMenu("Vote Perks", Size.FIVE_LINE, plugin, mainMenu);
 
 Creating Menu Items:
 
