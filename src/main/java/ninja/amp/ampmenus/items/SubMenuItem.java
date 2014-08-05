@@ -19,20 +19,20 @@
 package ninja.amp.ampmenus.items;
 
 import ninja.amp.ampmenus.events.ItemClickEvent;
-import ninja.amp.ampmenus.menus.Menu;
+import ninja.amp.ampmenus.menus.ItemMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * A {@link ninja.amp.ampmenus.items.MenuItem} that opens a sub {@link ninja.amp.ampmenus.menus.Menu}.
+ * A {@link ninja.amp.ampmenus.items.MenuItem} that opens a sub {@link ninja.amp.ampmenus.menus.ItemMenu}.
  */
 public class SubMenuItem extends MenuItem {
     private final JavaPlugin plugin;
-    private final Menu menu;
+    private final ItemMenu menu;
 
-    public SubMenuItem(JavaPlugin plugin, String displayName, ItemStack icon, Menu menu, String... lore) {
+    public SubMenuItem(JavaPlugin plugin, String displayName, ItemStack icon, ItemMenu menu, String... lore) {
         super(displayName, icon, lore);
         this.plugin = plugin;
         this.menu = menu;

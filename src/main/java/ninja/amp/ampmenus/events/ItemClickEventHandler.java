@@ -24,7 +24,7 @@ package ninja.amp.ampmenus.events;
 public interface ItemClickEventHandler {
 
     /**
-     * Called when an Item in the {@link ninja.amp.ampmenus.menus.Menu} is clicked.
+     * Called when an Item in the {@link ninja.amp.ampmenus.menus.ItemMenu} is clicked.
      *
      * @param event The ItemClickEvent.
      */

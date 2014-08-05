@@ -24,7 +24,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A {@link ninja.amp.ampmenus.items.StaticMenuItem} that opens the {@link ninja.amp.ampmenus.menus.Menu}'s parent menu if it exists.
+ * A {@link ninja.amp.ampmenus.items.StaticMenuItem} that opens the {@link ninja.amp.ampmenus.menus.ItemMenu}'s parent menu if it exists.
  */
 public class BackItem extends StaticMenuItem {
 

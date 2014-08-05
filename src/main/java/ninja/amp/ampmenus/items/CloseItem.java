@@ -24,7 +24,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * A {@link ninja.amp.ampmenus.items.StaticMenuItem} that closes the {@link ninja.amp.ampmenus.menus.Menu}.
+ * A {@link ninja.amp.ampmenus.items.StaticMenuItem} that closes the {@link ninja.amp.ampmenus.menus.ItemMenu}.
  */
 public class CloseItem extends StaticMenuItem {
 
