@@ -62,7 +62,6 @@ public class ItemMenu {
         this.size = size;
         this.items = new MenuItem[size.getSize()];
         this.parent = parent;
-        MenuListener.getInstance().register(plugin);
     }
 
     /**

@@ -40,6 +40,9 @@ If you're using [Maven](http://maven.apache.org/download.html) to manage project
 
 Basic Usage:
 
+    // Important - Register the MenuListener on enable or before players are able to open them
+    MenuListener.getInstance().register(plugin);
+    
     // Create an ItemMenu instance - you only need one of these. Don't create one every time you need it...
     ItemMenu menu = new ItemMenu("Shop", Size.TWO_LINE, plugin);
     
