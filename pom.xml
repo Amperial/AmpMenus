@@ -104,4 +104,21 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>greatman-repo</id>
+            <name>Public Releases</name>
+            <url>http://repo.greatmancode.com/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>greatman-repo</id>
+            <name>Public Snapshots</name>
+            <url>http://repo.greatmancode.com/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
