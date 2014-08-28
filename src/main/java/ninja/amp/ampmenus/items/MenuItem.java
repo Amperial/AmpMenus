@@ -19,7 +19,6 @@
 package ninja.amp.ampmenus.items;
 
 import ninja.amp.ampmenus.events.ItemClickEvent;
-import ninja.amp.ampmenus.events.ItemClickEventHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -30,7 +29,7 @@ import java.util.List;
 /**
  * An Item inside an {@link ninja.amp.ampmenus.menus.ItemMenu}.
  */
-public class MenuItem implements ItemClickEventHandler {
+public class MenuItem {
     private final String displayName;
     private final ItemStack icon;
     private final List<String> lore;
@@ -78,7 +77,11 @@ public class MenuItem implements ItemClickEventHandler {
         return setNameAndLore(getIcon().clone(), getDisplayName(), getLore());
     }
 
-    @Override
+    /**
+     * Called when the MenuItem is clicked.
+     *
+     * @param event The {@link ninja.amp.ampmenus.events.ItemClickEvent}.
+     */
     public void onItemClick(ItemClickEvent event) {
         // Do nothing by default
     }

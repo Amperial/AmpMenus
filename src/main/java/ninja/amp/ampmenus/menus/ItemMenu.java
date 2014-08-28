@@ -247,7 +247,10 @@ public class ItemMenu {
      */
     public void destroy() {
         plugin = null;
+        name = null;
+        size = null;
         items = null;
+        parent = null;
     }
 
     /**

@@ -34,7 +34,7 @@ If you're using [Maven](http://maven.apache.org/download.html) to manage project
     <dependency>
       <groupId>ninja.amp</groupId>
       <artifactId>ampmenus</artifactId>
-      <version>1.2</version>
+      <version>1.4-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
 
