@@ -286,15 +286,15 @@ public class ItemMenu {
          * @return The required {@link ninja.amp.ampmenus.menus.ItemMenu.Size}.
          */
         public static Size fit(int slots) {
-            if (slots < 10) {
+            if (slots < 9) {
                 return ONE_LINE;
-            } else if (slots < 19) {
+            } else if (slots < 18) {
                 return TWO_LINE;
-            } else if (slots < 28) {
+            } else if (slots < 27) {
                 return THREE_LINE;
-            } else if (slots < 37) {
+            } else if (slots < 36) {
                 return FOUR_LINE;
-            } else if (slots < 46) {
+            } else if (slots < 45) {
                 return FIVE_LINE;
             } else {
                 return SIX_LINE;
