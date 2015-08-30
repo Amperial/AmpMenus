@@ -196,6 +196,8 @@ public class ItemMenu {
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                 inventory.setItem(i, items[i].getFinalIcon(player));
+            } else {
+                inventory.setItem(i, new ItemStack(Material.AIR));
             }
         }
     }
