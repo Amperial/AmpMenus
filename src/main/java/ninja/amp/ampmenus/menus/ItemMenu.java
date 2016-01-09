@@ -20,6 +20,7 @@ package ninja.amp.ampmenus.menus;
 
 import ninja.amp.ampmenus.MenuListener;
 import ninja.amp.ampmenus.events.ItemClickEvent;
+import ninja.amp.ampmenus.items.IMenuItem;
 import ninja.amp.ampmenus.items.MenuItem;
 import ninja.amp.ampmenus.items.StaticMenuItem;
 import org.bukkit.Bukkit;
@@ -39,7 +40,7 @@ public class ItemMenu {
     private JavaPlugin plugin;
     private String name;
     private Size size;
-    private MenuItem[] items;
+    private IMenuItem[] items;
     private ItemMenu parent;
 
     /**
@@ -127,7 +128,20 @@ public class ItemMenu {
      * @param menuItem The {@link ninja.amp.ampmenus.items.MenuItem}.
      * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
      */
+    @Deprecated
     public ItemMenu setItem(int position, MenuItem menuItem) {
+        setItem(position, (IMenuItem) menuItem);
+        return this;
+    }
+
+    /**
+     * Sets the {@link ninja.amp.ampmenus.items.MenuItem} of a slot.
+     *
+     * @param position The slot position.
+     * @param menuItem The {@link ninja.amp.ampmenus.items.MenuItem}.
+     * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
+     */
+    public ItemMenu setItem(int position, IMenuItem menuItem) {
         items[position] = menuItem;
         return this;
     }
