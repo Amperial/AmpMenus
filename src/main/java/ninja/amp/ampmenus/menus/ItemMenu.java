@@ -135,14 +135,14 @@ public class ItemMenu {
     }
 
     /**
-     * Sets the {@link ninja.amp.ampmenus.items.MenuItem} of a slot.
+     * Sets the {@link ninja.amp.ampmenus.items.IMenuItem} of a slot.
      *
      * @param position The slot position.
-     * @param menuItem The {@link ninja.amp.ampmenus.items.MenuItem}.
+     * @param iMenuItem The {@link ninja.amp.ampmenus.items.IMenuItem}.
      * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
      */
-    public ItemMenu setItem(int position, IMenuItem menuItem) {
-        items[position] = menuItem;
+    public ItemMenu setItem(int position, IMenuItem iMenuItem) {
+        items[position] = iMenuItem;
         return this;
     }
 
@@ -156,6 +156,21 @@ public class ItemMenu {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 items[i] = menuItem;
+            }
+        }
+        return this;
+    }
+
+    /**
+     * Fills all empty slots in the {@link ninja.amp.ampmenus.menus.ItemMenu} with a certain {@link ninja.amp.ampmenus.items.IMenuItem}.
+     *
+     * @param iMenuItem The {@link ninja.amp.ampmenus.items.IMenuItem}.
+     * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
+     */
+    public ItemMenu fillEmptySlots(IMenuItem iMenuItem) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                items[i] = iMenuItem;
             }
         }
         return this;
