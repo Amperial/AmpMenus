@@ -122,19 +122,6 @@ public class ItemMenu {
     }
 
     /**
-     * Sets the {@link ninja.amp.ampmenus.items.MenuItem} of a slot.
-     *
-     * @param position The slot position.
-     * @param menuItem The {@link ninja.amp.ampmenus.items.MenuItem}.
-     * @return The {@link ninja.amp.ampmenus.menus.ItemMenu}.
-     */
-    @Deprecated
-    public ItemMenu setItem(int position, MenuItem menuItem) {
-        setItem(position, (IMenuItem) menuItem);
-        return this;
-    }
-
-    /**
      * Sets the {@link ninja.amp.ampmenus.items.IMenuItem} of a slot.
      *
      * @param position The slot position.
