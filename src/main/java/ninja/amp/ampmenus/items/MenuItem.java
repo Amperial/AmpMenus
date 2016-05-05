@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * An Item inside an {@link ninja.amp.ampmenus.menus.ItemMenu}.
  */
-public class MenuItem {
+public class MenuItem implements IMenuItem {
     private final String displayName;
     private final ItemStack icon;
     private final List<String> lore;
@@ -73,7 +73,7 @@ public class MenuItem {
      * @param player The player.
      * @return The final icon.
      */
-    public ItemStack getFinalIcon(Player player) {
+    @Override public ItemStack getFinalIcon(Player player) {
         return setNameAndLore(getIcon().clone(), getDisplayName(), getLore());
     }
 
@@ -82,7 +82,7 @@ public class MenuItem {
      *
      * @param event The {@link ninja.amp.ampmenus.events.ItemClickEvent}.
      */
-    public void onItemClick(ItemClickEvent event) {
+    @Override public void onItemClick(ItemClickEvent event) {
         // Do nothing by default
     }
 
