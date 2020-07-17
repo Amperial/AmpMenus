@@ -3,6 +3,8 @@ AmpMenus
 
 An object-oriented approach to handling Inventory Menus/GUIs in Bukkit.
 
+**Note: This is currently unsupported due to lack of time but check out [this updated fork](https://github.com/Scarsz/AmpMenus) for improvements and features!**
+
 AmpMenus is intended for advanced use cases such as the following examples:
 
 ![Example1](https://github.com/ampayne2/AmpMenus/blob/master/Example1.png)
